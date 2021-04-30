@@ -1,1 +1,1 @@
-# Github-profile-checker
+## A simple Github profile checker html page

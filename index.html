@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    body {
+      font-family: Arial;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    form.formclass input[type=text] {
+      padding: 10px;
+      font-size: 17px;
+      border: 1px solid grey;
+      float: left;
+      width: 80%;
+      background: #f1f1f1;
+    }
+    
+    form.formclass button {
+      float: left;
+      width: 20%;
+      padding: 10px;
+      background: #2196F3;
+      color: white;
+      font-size: 17px;
+      border: 1px solid grey;
+      border-left: none;
+      cursor: pointer;
+    }
+    
+    form.formclass button:hover {
+      background: #0b7dda;
+    }
+    
+    form.formclass::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    #putdatahere{
+        position: relative;
+        top: 50px;
+        font-size: large;
+    }
+    #nameOfUser{
+        position: relative;
+        top: 40px;
+    }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Github Profile</title>
+</head>
+<body>
+    <script>
+        function getData(){
+            var username=document.getElementById("username").value
+            fetch("https://api.github.com/users/"+username)
+            .then(res=>{
+                res.json()
+                    .then(data=>{
+                        document.getElementById("nameOfUser").innerHTML=data.name;
+                        document.getElementById("putdatahere").innerHTML="<b>ID: </b>"+data.id+"<br>"
+                            +"<b>Bio: </b>"+data.bio+"<br>"
+                            +"<b>Number of public Repositories: </b>"+data.public_repos+"<br>"
+                            +"<b>Location: </b>"+data.location+"<br>"
+                            +"<b>Link: </b>"+data.blog+"<br>"
+                            +"<b>Twitter: </b>"+data.twitter_username+"<br>"
+                            +"<b>Email: </b>"+data.email+"<br>"
+                            +"<b>Followers: </b>"+data.followers+"<br>"
+                            +"<b>Following: </b>"+data.following+"<br>"
+                            +"<b>Company: </b>"+data.company+"<br>"
+                            +"<b>Hireable: </b>"+(data.hireable==true?'Yes':'No')+"<br>"
+                            +"<b>Created at: </b>"+data.created_at+"<br>"
+                            +"<b>Updated at: </b>"+data.updated_at+"<br>"
+                    })
+            })
+        }
+    </script>
+    <center>
+        <form class="formclass" style="margin:auto;max-width:500px">
+            <input type="text" placeholder="Enter GitHub Username" id="username">
+            <button type="button" onclick="getData()"><i class="fa fa-search"></i></button>
+            <h1 id="nameOfUser"></h1>
+            <span id="putdatahere"></span>
+        </form>
+    </center>
+    
+</div>
+</body>
+</html>
